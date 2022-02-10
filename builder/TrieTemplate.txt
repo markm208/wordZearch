@@ -1,0 +1,47 @@
+export default class Trie {
+  constructor() {
+    //this is a tree of partial and complete words
+    this.wordMap = /*REPLACE_WORD_MAP*/;
+
+    //these are the proportional letter groups from a dictionary file
+    this.oneLetterGroups = /*ONE_LETTER_GROUPS*/;
+    this.twoLetterGroups = /*TWO_LETTER_GROUPS*/;
+    this.threeLetterGroups = /*THREE_LETTER_GROUPS*/;
+  }
+
+  search(word) {
+    let retVal = "";
+    word = word.toLowerCase();
+    
+    //get a (changeable) reference to the top level object
+    let wordMap = this.wordMap;
+    
+    //go through each letter in the search word
+    for(let i = 0;i < word.length;i++) {
+      const letter = word[i];
+
+      //if the current letter is in the map
+      if(wordMap[letter]) {
+        //if this is the last letter in the passed in word
+        if(i === word.length - 1) {
+          //if it is a complete word
+          if(wordMap[letter].completeWord) {
+            retVal = "FOUND";
+          } else { //partial word
+            retVal = "PARTIAL";
+          }
+        } else { //not the last letter of the passed in word
+          //move the reference down the tree to the next letter
+          wordMap = wordMap[letter].wordMap;
+        }
+      } else { //the current letter is not in the map
+        retVal = "NOT FOUND";
+        break;
+      }
+    }
+
+    return retVal;
+  }
+}
+
+export { Trie };
