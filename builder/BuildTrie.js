@@ -1,7 +1,6 @@
-const path = require("path");
 const fs = require("fs");
 
-//
+//the number of letter groups to create
 const TOP_NUMBER_OF_ONE_LETTER_GROUPS = 26;
 const TOP_NUMBER_OF_TWO_LETTER_GROUPS = 20;
 const TOP_NUMBER_OF_THREE_LETTER_GROUPS = 10;
